@@ -11,16 +11,15 @@ export abstract class View<T> {
         this._escapar = escapar;
     }
 
-    @logarTempoDeExecucao(true)
+    @logarTempoDeExecucao()
     update(model: T) {
 
         let template = this.template(model);
-        if (this._escapar)
-            template = template.replace(/<script>[\s\S]*?<\/script>/, '');
-
+        if(this._escapar)
+            template = template.replace(/<script>[\s\S]*?<\/script>/g, '');
         this._elemento.html(template);
     }
 
     abstract template(model: T): string;
 
-}  
+}
